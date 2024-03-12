@@ -1,0 +1,29 @@
+---
+
+---
+
+<form method="post">
+    <div>
+        <label for="nama">Nama</label>
+        <input type="text" name="nama" id="nama">
+    </div>
+
+    <button>Submit</button>
+</form>
+
+<script>
+    const form = document.querySelector<HTMLFormElement>('form')!;
+
+    form.onsubmit = async (event: SubmitEvent) => {
+        event.preventDefault();
+
+        const form_data = new FormData(event.currentTarget as HTMLFormElement);
+        const response = await fetch('api/pendaftaran', {
+            method: 'POST',
+            body: form_data
+        });
+
+        const data = await response.json();
+        console.log(data.valid);
+    };
+</script>
